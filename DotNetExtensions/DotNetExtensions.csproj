@@ -4,6 +4,13 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        
+        <Version>1.0.0</Version>
+        <Authors>Diogo Medeiros</Authors>
+        <Company>Diogo Medeiros</Company>
+        <Description>This is a collection of extension methods for .NET Core.</Description>
+        <PackageTags>extensions;helpers;dotnet</PackageTags>
+        <RepositoryUrl>https://github.com/Necas209/DotNetExtensions</RepositoryUrl>
     </PropertyGroup>
 
 </Project>
