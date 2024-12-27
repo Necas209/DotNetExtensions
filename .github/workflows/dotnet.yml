@@ -1,4 +1,4 @@
-# This workflow will build a .NET project
+# This workflow will build, test, and publish a .NET package
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: .NET
@@ -15,14 +15,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Step 1: Check out the repository
     - uses: actions/checkout@v4
+
+    # Step 2: Set up .NET environment
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
+
+    # Step 3: Restore dependencies
     - name: Restore dependencies
       run: dotnet restore
+
+    # Step 4: Build the project
     - name: Build
       run: dotnet build --no-restore
+
+    # Step 5: Run tests
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+    # Step 6: Pack the NuGet package
+    - name: Pack the package
+      run: dotnet pack --configuration Release -o ./artifacts
+
+    # Step 7: Publish the NuGet package to GitHub Packages
+    - name: Publish to GitHub Packages
+      env:
+        NUGET_API_KEY: ${{ secrets.GH_PACKAGES_TOKEN }}
+      run: dotnet nuget push ./artifacts/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
