@@ -9,6 +9,7 @@
         <Authors>Diogo Medeiros</Authors>
         <Company>Diogo Medeiros</Company>
         <Description>This is a collection of extension methods for .NET Core.</Description>
+        <PackageId>DotNetExtensions</PackageId>
         <PackageTags>extensions;helpers;dotnet</PackageTags>
         <RepositoryUrl>https://github.com/Necas209/DotNetExtensions</RepositoryUrl>
     </PropertyGroup>
