@@ -9,7 +9,7 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestPairwiseWithElements()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.Pairwise().ToImmutableArray();
 
         Assert.AreEqual(4, result.Length);
@@ -22,7 +22,7 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestPairwiseWithOneElement()
     {
-        var source = new[] { 1 };
+        int[] source = [1];
         var result = source.Pairwise().ToImmutableArray();
 
         Assert.AreEqual(0, result.Length);
@@ -31,28 +31,42 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestPairwiseWithNoElements()
     {
-        var source = Array.Empty<int>();
+        int[] source = [];
         var result = source.Pairwise().ToImmutableArray();
 
         Assert.AreEqual(0, result.Length);
     }
-    
-   [TestMethod]
-   public void TestAdjacentWithValidLength()
+
+    [TestMethod]
+    public void TestQuintuplesWithElements()
     {
-         var source = new[] { 1, 2, 3, 4, 5 };
-         var result = source.Adjacent(3).ToArray();
-    
-         Assert.AreEqual(3, result.Length);
-         Assert.IsTrue(result[0] is [1, 2, 3]);
-         Assert.IsTrue(result[1] is [2, 3, 4]);
-         Assert.IsTrue(result[2] is [3, 4, 5]);
+        int[] source = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        var result = source.Quintuples().ToImmutableArray();
+
+        Assert.AreEqual(5, result.Length);
+        Assert.AreEqual((1, 2, 3, 4, 5), result[0]);
+        Assert.AreEqual((2, 3, 4, 5, 6), result[1]);
+        Assert.AreEqual((3, 4, 5, 6, 7), result[2]);
+        Assert.AreEqual((4, 5, 6, 7, 8), result[3]);
+        Assert.AreEqual((5, 6, 7, 8, 9), result[4]);
     }
-   
+
+    [TestMethod]
+    public void TestAdjacentWithValidLength()
+    {
+        int[] source = [1, 2, 3, 4, 5];
+        var result = source.Adjacent(3).ToArray();
+
+        Assert.AreEqual(3, result.Length);
+        Assert.IsTrue(result[0] is [1, 2, 3]);
+        Assert.IsTrue(result[1] is [2, 3, 4]);
+        Assert.IsTrue(result[2] is [3, 4, 5]);
+    }
+
     [TestMethod]
     public void TestAdjacentWithInvalidLength()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.Adjacent(6).ToArray();
 
         Assert.AreEqual(0, result.Length);
@@ -61,7 +75,7 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestSkipAtWithValidIndex()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.SkipAt(4).ToImmutableArray();
 
         Assert.AreEqual(4, result.Length);
@@ -74,7 +88,7 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestSkipAtWithInvalidIndex()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.SkipAt(5).ToImmutableArray();
 
         Assert.AreEqual(5, result.Length);
@@ -88,11 +102,11 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestCombinationsWithZeroLength()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.Combinations(0)
             .Select(x => x.ToImmutableArray())
             .ToImmutableArray();
-        
+
         Assert.AreEqual(1, result.Length);
         Assert.IsTrue(result[0] is []);
     }
@@ -100,7 +114,7 @@ public class EnumerableExtensionsTests
     [TestMethod]
     public void TestCombinationsWithOneLength()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.Combinations(1)
             .Select(x => x.ToImmutableArray())
             .ToImmutableArray();
@@ -112,11 +126,11 @@ public class EnumerableExtensionsTests
         Assert.IsTrue(result[3] is [4]);
         Assert.IsTrue(result[4] is [5]);
     }
-    
+
     [TestMethod]
     public void TestCombinationsWithTwoLength()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.Combinations(2)
             .Select(x => x.ToImmutableArray())
             .ToImmutableArray();
@@ -133,11 +147,11 @@ public class EnumerableExtensionsTests
         Assert.IsTrue(result[8] is [3, 5]);
         Assert.IsTrue(result[9] is [4, 5]);
     }
-    
+
     [TestMethod]
     public void TestCombinationsWithThreeLength()
     {
-        var source = new[] { 1, 2, 3, 4, 5 };
+        int[] source = [1, 2, 3, 4, 5];
         var result = source.Combinations(3)
             .Select(x => x.ToImmutableArray())
             .ToImmutableArray();
