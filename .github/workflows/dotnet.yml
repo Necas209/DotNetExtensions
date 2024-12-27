@@ -45,3 +45,26 @@ jobs:
       env:
         NUGET_API_KEY: ${{ secrets.GH_PACKAGES_TOKEN }}
       run: dotnet nuget push ./artifacts/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
+      
+    # Step 8: Get the version number from the .csproj file
+    - name: Get package version
+      id: version
+      run: |
+        VERSION=$(dotnet list package --outdated | grep -oP '(?<=DotNetExtensions\s)(\d+\.\d+\.\d+)' | head -n 1)
+        echo "Package version is $VERSION"
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+      
+    # Step 9: Create a GitHub Release with the package version
+    - name: Create GitHub Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+      run: |
+        VERSION=${{ env.VERSION }}
+        git tag -a "$VERSION" -m "Release $VERSION"
+        git push origin "$VERSION"
+        
+        # Create release using the GitHub API
+        curl -X POST \
+          -H "Authorization: token $GITHUB_TOKEN" \
+          -d "{\"tag_name\": \"$VERSION\", \"name\": \"$VERSION\", \"body\": \"Release of version $VERSION\"}" \
+          "https://api.github.com/repos/${{ github.repository }}/releases"
