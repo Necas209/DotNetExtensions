@@ -46,11 +46,12 @@ jobs:
         NUGET_API_KEY: ${{ secrets.GH_PACKAGES_TOKEN }}
       run: dotnet nuget push ./artifacts/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
       
-    # Step 8: Get the version number from the .csproj file
-    - name: Get package version
+    # Step 8: Grab the version from the .nupkg file
+    - name: Get version from .nupkg
       id: version
       run: |
-        VERSION=$(dotnet list package --outdated | grep -oP '(?<=DotNetExtensions\s)(\d+\.\d+\.\d+)' | head -n 1)
+        # Get the version from the first .nupkg file in the artifacts folder
+        VERSION=$(ls ./artifacts/*.nupkg | head -n 1 | sed -E 's/.*-(.*)\.nupkg/\1/')
         echo "Package version is $VERSION"
         echo "VERSION=$VERSION" >> $GITHUB_ENV
       
