@@ -23,7 +23,7 @@ public class NumberExtensionsTests
         Assert.AreEqual((1, 0), 10.SplitNumber());
         Assert.AreEqual((12, 34), 1234.SplitNumber());
         Assert.AreEqual((123, 456), 123456.SplitNumber());
-        Assert.AreEqual((1234, 567), 1234567.SplitNumber());
+        Assert.AreEqual((123, 4567), 1234567.SplitNumber());
     }
     
     [TestMethod]

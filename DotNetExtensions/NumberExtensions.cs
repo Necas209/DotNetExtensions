@@ -42,11 +42,8 @@ public static class NumberExtensions
         if (number < T.Zero)
             throw new ArgumentException("Number must be positive.", nameof(number));
 
-        if (number < T.CreateChecked(10))
-            return (T.Zero, number);
-
         var numDigits = number.NumberOfDigits();
-        var halfDigits = numDigits / 2;
+        var halfDigits = numDigits / 2 + numDigits % 2;
         var divisor = T.CreateChecked(Math.Pow(10, halfDigits));
 
         var leftPart = number / divisor;
