@@ -22,19 +22,27 @@ public static class NumberExtensions
         if (number < T.Zero)
             return false;
 
-        var ten = T.CreateChecked(10);
-        if (number < ten)
-            return true;
+        return number == number.Reverse();
+    }
 
-        var original = number;
+    public static T Reverse<T>(this T number) where T : IBinaryInteger<T>
+    {
+        var ten = T.CreateChecked(10);
+        if (number > -ten && number < ten)
+            return number;
+
         var reverse = T.Zero;
-        while (number > T.Zero)
+        while (number != T.Zero)
         {
-            reverse = reverse * ten + number % ten;
+            checked
+            {
+                reverse = reverse * ten + number % ten;
+            }
+
             number /= ten;
         }
-        
-        return original == reverse;
+
+        return reverse;
     }
 
     public static (T Left, T Right) SplitNumber<T>(this T number) where T : INumber<T>
