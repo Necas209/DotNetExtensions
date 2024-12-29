@@ -1,0 +1,22 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetExtensions", "DotNetExtensions\DotNetExtensions.csproj", "{DDCD9578-55DB-480F-9F10-E4AC37BF748F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetExtensionsTests", "DotNetExtensionsTests\DotNetExtensionsTests.csproj", "{A7626440-AAEC-4A4F-9B30-618E37B34C9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDCD9578-55DB-480F-9F10-E4AC37BF748F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDCD9578-55DB-480F-9F10-E4AC37BF748F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDCD9578-55DB-480F-9F10-E4AC37BF748F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDCD9578-55DB-480F-9F10-E4AC37BF748F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7626440-AAEC-4A4F-9B30-618E37B34C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7626440-AAEC-4A4F-9B30-618E37B34C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7626440-AAEC-4A4F-9B30-618E37B34C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7626440-AAEC-4A4F-9B30-618E37B34C9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
