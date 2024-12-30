@@ -18,12 +18,12 @@ public class NumberExtensionsTests
     [TestMethod]
     public void TestSplitNumber()
     {
-        Assert.AreEqual((0, 0), 0.SplitNumber());
-        Assert.AreEqual((0, 1), 1.SplitNumber());
-        Assert.AreEqual((1, 0), 10.SplitNumber());
-        Assert.AreEqual((12, 34), 1234.SplitNumber());
-        Assert.AreEqual((123, 456), 123456.SplitNumber());
-        Assert.AreEqual((123, 4567), 1234567.SplitNumber());
+        Assert.AreEqual((0, 0), 0.Split());
+        Assert.AreEqual((0, 1), 1.Split());
+        Assert.AreEqual((1, 0), 10.Split());
+        Assert.AreEqual((12, 34), 1234.Split());
+        Assert.AreEqual((123, 456), 123456.Split());
+        Assert.AreEqual((123, 4567), 1234567.Split());
     }
 
     [TestMethod]

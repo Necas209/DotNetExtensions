@@ -101,7 +101,7 @@ public static class NumberExtensions
     /// <exception cref="ArgumentException">
     /// Thrown if the number is negative.
     /// </exception>
-    public static (T Left, T Right) SplitNumber<T>(this T number) where T : INumber<T>
+    public static (T Left, T Right) Split<T>(this T number) where T : INumber<T>
     {
         ArgumentOutOfRangeException.ThrowIfNegative(number);
 
