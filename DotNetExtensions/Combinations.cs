@@ -2,10 +2,26 @@ namespace DotNetExtensions;
 
 public static partial class EnumerableExtensions
 {
+    /// <summary>
+    /// Generates all possible combinations of a specified length from the given source sequence.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements in the source sequence.</typeparam>
+    /// <param name="source">The sequence of elements to choose combinations from.</param>
+    /// <param name="length">The length of each combination.</param>
+    /// <returns>
+    /// A sequence of combinations, where each combination is represented as an <see cref="IEnumerable{T}"/>.
+    /// </returns>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if the <paramref name="source"/> is <c>null</c>.
+    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">
+    /// Thrown if the <paramref name="length"/> is negative.
+    /// </exception>
     public static IEnumerable<IEnumerable<T>> Combinations<T>(this IEnumerable<T> source, int length)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentOutOfRangeException.ThrowIfNegative(length);
+
         return CombinationsInternal(source, length);
     }
 
