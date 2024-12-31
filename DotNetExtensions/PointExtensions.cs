@@ -38,7 +38,7 @@ public static class PointExtensions
     /// <remarks>
     /// The Manhattan distance is the sum of the absolute differences of their X and Y coordinates.
     /// It is commonly used in grid-based distance calculations where diagonal movement is not allowed.
-    /// </remarks>ca
+    /// </remarks>
     public static int ManhattanDistance(this Point point, Point other)
     {
         return Math.Abs(point.X - other.X) + Math.Abs(point.Y - other.Y);

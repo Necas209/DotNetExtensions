@@ -38,6 +38,8 @@ public class NumberExtensionsTests
         Assert.IsFalse(12.IsPalindrome());
         Assert.IsFalse(123.IsPalindrome());
         Assert.IsFalse(1234.IsPalindrome());
+        Assert.IsFalse(int.MaxValue.IsPalindrome());
+        Assert.IsFalse(int.MinValue.IsPalindrome());
     }
 
     [TestMethod]
