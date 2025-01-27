@@ -3,6 +3,10 @@
 
 name: .NET
 
+permissions:
+  contents: read
+  security-events: write
+
 on:
   push:
     branches: [ "main" ]
