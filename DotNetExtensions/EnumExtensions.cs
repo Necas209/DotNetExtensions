@@ -1,5 +1,7 @@
 using System.Runtime.CompilerServices;
 
+#pragma warning disable once CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
+
 namespace DotNetExtensions;
 
 /// <summary>
@@ -24,13 +26,13 @@ public static class EnumExtensions
     /// </remarks>
     public static bool HasAnyFlag<TEnum>(this TEnum value, TEnum flag) where TEnum : unmanaged, Enum
     {
+        // Since this method covers all possible backing types of the enum, we can safely disable the CS8509 warning.
         return Unsafe.SizeOf<TEnum>() switch
         {
             sizeof(byte) => (Unsafe.As<TEnum, byte>(ref value) & Unsafe.As<TEnum, byte>(ref flag)) != 0,
             sizeof(ushort) => (Unsafe.As<TEnum, ushort>(ref value) & Unsafe.As<TEnum, ushort>(ref flag)) != 0,
-            sizeof(int) => (Unsafe.As<TEnum, uint>(ref value) & Unsafe.As<TEnum, uint>(ref flag)) != 0,
-            sizeof(long) => (Unsafe.As<TEnum, ulong>(ref value) & Unsafe.As<TEnum, ulong>(ref flag)) != 0,
-            _ => throw new Exception("Size does not match a known Enum backing type.")
+            sizeof(uint) => (Unsafe.As<TEnum, uint>(ref value) & Unsafe.As<TEnum, uint>(ref flag)) != 0,
+            sizeof(ulong) => (Unsafe.As<TEnum, ulong>(ref value) & Unsafe.As<TEnum, ulong>(ref flag)) != 0
         };
     }
 }
