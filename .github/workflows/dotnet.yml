@@ -48,4 +48,4 @@ jobs:
     - name: Publish to GitHub Packages
       env:
         NUGET_API_KEY: ${{ secrets.GH_PACKAGES_TOKEN }}
-      run: dotnet nuget push ./artifacts/*.nupkg --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
+      run: dotnet nuget push ./artifacts/*.nupkg --skip-duplicate --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --api-key ${{ secrets.GH_PACKAGES_TOKEN }}
