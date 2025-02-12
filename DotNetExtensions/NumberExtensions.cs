@@ -16,17 +16,28 @@ public static class NumberExtensions
     /// <remarks>
     /// For negative numbers, the sign is ignored, and the count includes all digits of the absolute value.
     /// </remarks>
-    public static int NumberOfDigits<T>(this T number) where T : INumber<T>
+    public static ulong NumberOfDigits<T>(this T number) where T : IBinaryInteger<T>
     {
         if (number == T.Zero)
             return 1;
 
         if (number < T.Zero)
         {
-            number = -number;
+            try
+            {
+                checked
+                {
+                    number = -number; // Make the number positive.
+                }
+            }
+            catch (OverflowException)
+            {
+                number = -++number; // Increment to avoid overflow.
+            }
         }
 
-        return (int)Math.Floor(Math.Log10(double.CreateChecked(number)) + 1);
+        var magnitude = (ulong)Math.Floor(Math.Log10(double.CreateChecked(number)));
+        return magnitude + 1;
     }
 
     /// <summary>
@@ -101,7 +112,7 @@ public static class NumberExtensions
     /// <exception cref="ArgumentException">
     /// Thrown if the number is negative.
     /// </exception>
-    public static (T Left, T Right) Split<T>(this T number) where T : INumber<T>
+    public static (T Left, T Right) Split<T>(this T number) where T : IBinaryInteger<T>
     {
         ArgumentOutOfRangeException.ThrowIfNegative(number);
 
