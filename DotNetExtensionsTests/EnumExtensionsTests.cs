@@ -26,7 +26,7 @@ public class EnumExtensionsTests
     }
 
     [Flags]
-    private enum ShortFlags : ushort
+    private enum UShortFlags : ushort
     {
         Flag1 = 1 << 0,
         Flag2 = 1 << 1,
@@ -37,12 +37,12 @@ public class EnumExtensionsTests
     [TestMethod]
     public void TestHasAnyFlagShort()
     {
-        const ShortFlags flags = ShortFlags.Flag1 | ShortFlags.Flag2 | ShortFlags.Flag4;
+        const UShortFlags flags = UShortFlags.Flag1 | UShortFlags.Flag2 | UShortFlags.Flag4;
 
-        Assert.IsTrue(flags.HasAnyFlag(ShortFlags.Flag1));
-        Assert.IsTrue(flags.HasAnyFlag(ShortFlags.Flag2));
-        Assert.IsTrue(flags.HasAnyFlag(ShortFlags.Flag4));
-        Assert.IsFalse(flags.HasAnyFlag(ShortFlags.Flag3));
+        Assert.IsTrue(flags.HasAnyFlag(UShortFlags.Flag1));
+        Assert.IsTrue(flags.HasAnyFlag(UShortFlags.Flag2));
+        Assert.IsTrue(flags.HasAnyFlag(UShortFlags.Flag4));
+        Assert.IsFalse(flags.HasAnyFlag(UShortFlags.Flag3));
     }
 
     [Flags]

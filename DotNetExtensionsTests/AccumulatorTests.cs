@@ -45,6 +45,6 @@ public class AccumulatorTests
         Assert.AreEqual(int.MinValue, accumulator.Max);
         Assert.AreEqual(0, accumulator.Sum);
         Assert.AreEqual(0, accumulator.Count);
-        Assert.ThrowsException<InvalidOperationException>(() => accumulator.Mean);
+        Assert.ThrowsExactly<InvalidOperationException>(() => _ = accumulator.Mean);
     }
 }

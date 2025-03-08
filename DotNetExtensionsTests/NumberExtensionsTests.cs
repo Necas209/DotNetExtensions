@@ -59,6 +59,6 @@ public class NumberExtensionsTests
         Assert.AreEqual(-21, (-12).Reverse());
         Assert.AreEqual(-4321, (-1234).Reverse());
         Assert.AreEqual(-7654321, (-1234567).Reverse());
-        Assert.ThrowsException<OverflowException>(() => int.MaxValue.Reverse());
+        Assert.ThrowsExactly<OverflowException>(() => _ = int.MaxValue.Reverse());
     }
 }
