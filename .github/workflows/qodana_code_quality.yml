@@ -1,4 +1,4 @@
-name: .NET - Coverlet & Qodana
+name: Coverlet & Qodana
 
 permissions:
   contents: read
@@ -28,55 +28,32 @@ jobs:
           dotnet-version: '9.0'
 
       - name: Add coverlet dependencies
-        working-directory: DotNetExtensionsTests
+        working-directory: ./DotNetExtensionsTests
         run: |
           dotnet add package coverlet.msbuild
           dotnet add package coverlet.collector
 
       - name: Build solution
-        working-directory: DotNetExtensionsTests
+        working-directory: .
         run: dotnet build
 
       - name: Run tests with code coverage
-        working-directory: DotNetExtensionsTests
+        working-directory: .
         run: |
           dotnet test /p:CollectCoverage=true \
-                      /p:CoverletOutput=./coverage/ \
+                      /p:CoverletOutput=../.qodana/code-coverage/ \
                       /p:CoverletOutputFormat=lcov
 
       - name: Archive coverage data
         uses: actions/upload-artifact@v4
         with:
           name: net-coverage-data
-          path: DotNetExtensionsTests/coverage
-
-  qodana:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      checks: write
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
-
-      - name: Download coverage data
-        uses: actions/download-artifact@v4
-        with:
-          name: net-coverage-data
-          path: DotNetExtensionsTests/coverage
-
-      - name: Debug Coverage File
-        run: ls -l DotNetExtensionsTests/coverage/
+          path: .qodana/code-coverage/
 
       - name: Run Qodana Scan
         uses: JetBrains/qodana-action@v2024.3
         with:
-          args: "-i,DotNetExtensionsTests,--linter,jetbrains/qodana-dotnet:2024.3"
+          args: "-i,.,--linter,jetbrains/qodana-dotnet:2024.3"
           pr-mode: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_318327343 }}
