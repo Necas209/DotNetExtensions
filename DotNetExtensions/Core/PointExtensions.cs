@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace DotNetExtensions;
+namespace DotNetExtensions.Core;
 
 /// <summary>
 /// Provides extension methods for working with <see cref="Point"/> structures.

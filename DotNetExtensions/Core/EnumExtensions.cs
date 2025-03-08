@@ -1,8 +1,6 @@
 using System.Runtime.CompilerServices;
 
-#pragma warning disable once CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
-
-namespace DotNetExtensions;
+namespace DotNetExtensions.Core;
 
 /// <summary>
 /// Provides extension methods for working with enumeration types.
@@ -27,7 +25,9 @@ public static class EnumExtensions
     public static bool HasAnyFlag<TEnum>(this TEnum value, TEnum flag) where TEnum : unmanaged, Enum
     {
         // Since this method covers all possible backing types of the enum, we can safely disable the CS8509 warning.
+#pragma warning disable CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
         return Unsafe.SizeOf<TEnum>() switch
+#pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
         {
             sizeof(byte) => (Unsafe.As<TEnum, byte>(ref value) & Unsafe.As<TEnum, byte>(ref flag)) != 0,
             sizeof(ushort) => (Unsafe.As<TEnum, ushort>(ref value) & Unsafe.As<TEnum, ushort>(ref flag)) != 0,

@@ -1,6 +1,6 @@
 using System.Numerics;
 
-namespace DotNetExtensions;
+namespace DotNetExtensions.Core;
 
 /// <summary>
 /// Provides extension methods for working with numeric types.

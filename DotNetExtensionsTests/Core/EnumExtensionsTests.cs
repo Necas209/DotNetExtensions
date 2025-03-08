@@ -1,6 +1,6 @@
-using DotNetExtensions;
+using DotNetExtensions.Core;
 
-namespace DotNetExtensionsTests;
+namespace DotNetExtensionsTests.Core;
 
 [TestClass]
 public class EnumExtensionsTests

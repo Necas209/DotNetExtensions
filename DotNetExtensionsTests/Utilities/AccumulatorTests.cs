@@ -1,6 +1,6 @@
-using DotNetExtensions;
+using DotNetExtensions.Utilities;
 
-namespace DotNetExtensionsTests;
+namespace DotNetExtensionsTests.Utilities;
 
 [TestClass]
 public class AccumulatorTests
