@@ -1,6 +1,6 @@
-using DotNetExtensions;
+using DotNetExtensions.Collections;
 
-namespace DotNetExtensionsTests;
+namespace DotNetExtensionsTests.Collections;
 
 [TestClass]
 public class DictionaryExtensionsTests

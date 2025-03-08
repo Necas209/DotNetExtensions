@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
-namespace DotNetExtensions;
+namespace DotNetExtensions.Utilities;
 
 public class Accumulator<T> where T : INumber<T>, IMinMaxValue<T>
 {

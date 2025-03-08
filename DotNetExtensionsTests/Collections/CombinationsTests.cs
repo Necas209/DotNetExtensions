@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
-using DotNetExtensions;
+using DotNetExtensions.Collections;
 
-namespace DotNetExtensionsTests;
+namespace DotNetExtensionsTests.Collections;
 
 public partial class EnumerableExtensionsTests
 {
@@ -9,7 +9,8 @@ public partial class EnumerableExtensionsTests
     public void TestCombinationsWithZeroLength()
     {
         int[] source = [1, 2, 3, 4, 5];
-        var result = source.Combinations(0)
+        var result = source
+            .Combinations(0)
             .Select(x => x.ToImmutableArray())
             .ToImmutableArray();
 

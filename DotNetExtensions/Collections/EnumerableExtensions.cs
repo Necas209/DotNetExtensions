@@ -1,4 +1,4 @@
-﻿namespace DotNetExtensions;
+﻿namespace DotNetExtensions.Collections;
 
 /// <summary>
 /// Provides extension methods for working with enumerable sequences.
