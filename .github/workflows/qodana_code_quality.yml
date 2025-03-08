@@ -1,27 +1,78 @@
-name: Qodana
+name: .NET - Coverlet & Qodana
+
 on:
   workflow_dispatch:
   pull_request:
   push:
-    branches: # Specify your branches here
-      - main # The 'main' branch
-      - 'releases/*' # The release branches
+    branches:
+      - main
+      - 'releases/*'
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0'
+
+      - name: Add coverlet dependencies
+        working-directory: DotNetExtensionsTests
+        run: |
+          dotnet add package coverlet.msbuild
+          dotnet add package coverlet.collector
+
+      - name: Build solution
+        working-directory: DotNetExtensionsTests
+        run: dotnet build
+
+      - name: Run tests with code coverage
+        working-directory: DotNetExtensionsTests
+        run: |
+          dotnet test /p:CollectCoverage=true \
+                      /p:CoverletOutput=./coverage/ \
+                      /p:CoverletOutputFormat=lcov
+
+      - name: Archive coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: net-coverage-data
+          path: DotNetExtensionsTests/coverage
+
   qodana:
+    needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
       checks: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
-          fetch-depth: 0  # a full history is required for pull request analysis
-      - name: 'Qodana Scan'
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Download coverage data
+        uses: actions/download-artifact@v4
+        with:
+          name: net-coverage-data
+          path: DotNetExtensionsTests/coverage
+
+      - name: Debug Coverage File
+        run: ls -l DotNetExtensionsTests/coverage/
+
+      - name: Run Qodana Scan
         uses: JetBrains/qodana-action@v2024.3
         with:
+          args: "-i,DotNetExtensionsTests,--linter,jetbrains/qodana-dotnet:2024.3"
           pr-mode: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_318327343 }}
