@@ -80,8 +80,6 @@ public static class NumberExtensions
     public static T Reverse<T>(this T number) where T : IBinaryInteger<T>
     {
         var ten = T.CreateChecked(10);
-        if (number > -ten && number < ten)
-            return number;
 
         var reverse = T.Zero;
         while (number != T.Zero)
@@ -109,7 +107,7 @@ public static class NumberExtensions
     /// The number is split based on the number of digits, with the left part containing
     /// the most significant digits and the right part containing the least significant digits.
     /// </remarks>
-    /// <exception cref="ArgumentException">
+    /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown if the number is negative.
     /// </exception>
     public static (T Left, T Right) Split<T>(this T number) where T : IBinaryInteger<T>

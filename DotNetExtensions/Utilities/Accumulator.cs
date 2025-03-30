@@ -1,17 +1,14 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 
 namespace DotNetExtensions.Utilities;
 
 public class Accumulator<T> where T : INumber<T>, IMinMaxValue<T>
 {
-    public Accumulator() => Reset();
+    public T Min { get; private set; } = T.MaxValue;
 
-    public T Min { get; private set; }
+    public T Max { get; private set; } = T.MinValue;
 
-    public T Max { get; private set; }
-
-    public T Sum { get; private set; }
+    public T Sum { get; private set; } = T.Zero;
 
     public int Count { get; private set; }
 
@@ -35,7 +32,6 @@ public class Accumulator<T> where T : INumber<T>, IMinMaxValue<T>
         Count++;
     }
 
-    [MemberNotNull(nameof(Min), nameof(Max), nameof(Sum))]
     public void Reset()
     {
         Min = T.MaxValue;

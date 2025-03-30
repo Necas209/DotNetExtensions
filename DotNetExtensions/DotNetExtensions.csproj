@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         
-        <Version>5.0.0</Version>
+        <Version>5.0.1</Version>
         <Authors>Diogo Medeiros</Authors>
         <Company>Diogo Medeiros</Company>
         <Description>This is a collection of extension methods for .NET Core.</Description>

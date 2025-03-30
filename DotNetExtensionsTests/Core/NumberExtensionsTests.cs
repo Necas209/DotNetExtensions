@@ -19,7 +19,7 @@ public class NumberExtensionsTests
     }
 
     [TestMethod]
-    public void TestSplitNumber()
+    public void TestSplit()
     {
         Assert.AreEqual((0, 0), 0.Split());
         Assert.AreEqual((0, 1), 1.Split());
