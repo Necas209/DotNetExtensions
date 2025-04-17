@@ -12,6 +12,10 @@
         <PackageId>DotNetExtensions</PackageId>
         <PackageTags>extensions;helpers;dotnet</PackageTags>
         <RepositoryUrl>https://github.com/Necas209/DotNetExtensions</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
+    <ItemGroup>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
 </Project>
