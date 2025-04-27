@@ -9,7 +9,7 @@ public static partial class EnumerableExtensions
     /// <param name="source">The sequence of elements to choose combinations from.</param>
     /// <param name="length">The length of each combination.</param>
     /// <returns>
-    /// A sequence of combinations, where each combination is represented as an <see cref="IEnumerable{T}"/>.
+    /// A sequence of combinations, where each combination is represented as a <see cref="List{T}"/>.
     /// </returns>
     /// <exception cref="ArgumentNullException">
     /// Thrown if the <paramref name="source"/> is <c>null</c>.
@@ -17,7 +17,7 @@ public static partial class EnumerableExtensions
     /// <exception cref="ArgumentOutOfRangeException">
     /// Thrown if the <paramref name="length"/> is negative.
     /// </exception>
-    public static IEnumerable<IEnumerable<T>> Combinations<T>(this IEnumerable<T> source, int length)
+    public static IEnumerable<List<T>> Combinations<T>(this IEnumerable<T> source, int length)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentOutOfRangeException.ThrowIfNegative(length);
@@ -25,9 +25,9 @@ public static partial class EnumerableExtensions
         return CombinationsInternal(source, length);
     }
 
-    private static IEnumerable<IEnumerable<T>> CombinationsInternal<T>(IEnumerable<T> source, int length)
+    private static IEnumerable<List<T>> CombinationsInternal<T>(IEnumerable<T> source, int length)
     {
-        var array = source as T[] ?? source.ToArray();
+        var array = source as IList<T> ?? source.ToArray();
 
         if (length == 0)
         {
@@ -35,7 +35,7 @@ public static partial class EnumerableExtensions
             yield break;
         }
 
-        if (length > array.Length)
+        if (length > array.Count)
             yield break;
 
         // Stack to hold the current state for iteration
@@ -53,8 +53,8 @@ public static partial class EnumerableExtensions
                 continue;
             }
 
-            // Push next elements onto the stack in reverse order to ensure correct order
-            for (var i = array.Length - 1; i > index; i--)
+            // Push next elements onto the stack in reverse order to ensure the correct order
+            for (var i = array.Count - 1; i > index; i--)
             {
                 var newCombination = new List<T>(combination) { array[i] };
                 stack.Push((i, newCombination));

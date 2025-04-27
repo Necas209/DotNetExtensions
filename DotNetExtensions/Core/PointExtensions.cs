@@ -36,7 +36,8 @@ public static class PointExtensions
     /// <param name="other">The target point.</param>
     /// <returns>The Manhattan distance between the two points.</returns>
     /// <remarks>
-    /// The Manhattan distance is the sum of the absolute differences of their X and Y coordinates.
+    /// The Manhattan distance is calculated
+    /// by summing the absolute differences between the X coordinates and the Y coordinates.
     /// It is commonly used in grid-based distance calculations where diagonal movement is not allowed.
     /// </remarks>
     public static int ManhattanDistance(this Point point, Point other)

@@ -3,7 +3,7 @@ using System.Numerics;
 namespace DotNetExtensions.Utilities;
 
 /// <summary>
-/// A generic accumulator class that tracks the minimum, maximum, sum, and count of added values,
+/// A generic accumulator class that tracks the minimum, maximum, sum, and count of added values
 /// and calculates the mean of the values.
 /// </summary>
 /// <typeparam name="T">

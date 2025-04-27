@@ -4,8 +4,8 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        
-        <Version>5.1.0</Version>
+
+        <Version>5.2.0</Version>
         <Authors>Diogo Medeiros</Authors>
         <Company>Diogo Medeiros</Company>
         <Description>This is a collection of extension methods for .NET Core.</Description>
@@ -18,4 +18,5 @@
     <ItemGroup>
         <None Include="..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
+
 </Project>
