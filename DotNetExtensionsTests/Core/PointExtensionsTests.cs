@@ -11,7 +11,7 @@ public class PointExtensionsTests
     {
         var point = new Point(0, 0);
         var (left, right, top, bottom) = point.GetNeighbors();
-        
+
         Assert.AreEqual(new Point(-1, 0), left);
         Assert.AreEqual(new Point(1, 0), right);
         Assert.AreEqual(new Point(0, -1), top);
@@ -26,7 +26,7 @@ public class PointExtensionsTests
 
         Assert.AreEqual(7, point.ManhattanDistance(other));
     }
-    
+
     [TestMethod]
     public void TestManhattanDistance_SamePoint()
     {
@@ -35,7 +35,7 @@ public class PointExtensionsTests
 
         Assert.AreEqual(0, point.ManhattanDistance(other));
     }
-    
+
     [TestMethod]
     public void TestManhattanDistance_Negative()
     {

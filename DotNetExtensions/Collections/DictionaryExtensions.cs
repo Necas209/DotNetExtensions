@@ -37,10 +37,7 @@ public static class DictionaryExtensions
         ArgumentNullException.ThrowIfNull(key);
 
         ref var val = ref CollectionsMarshal.GetValueRefOrAddDefault(dictionary, key, out var exists);
-        if (!exists)
-        {
-            val = value;
-        }
+        if (!exists) val = value;
 
         return val;
     }

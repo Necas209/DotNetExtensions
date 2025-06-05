@@ -18,7 +18,7 @@ public partial class EnumerableExtensionsTests
         Assert.AreEqual((4, 5, 6, 7, 8), result[3]);
         Assert.AreEqual((5, 6, 7, 8, 9), result[4]);
     }
-    
+
     [TestMethod]
     public void TestQuintuplesWithZeroElements()
     {
@@ -27,7 +27,7 @@ public partial class EnumerableExtensionsTests
 
         Assert.AreEqual(0, result.Length);
     }
-    
+
     [TestMethod]
     public void TestQuintuplesWithOneElement()
     {
@@ -36,7 +36,7 @@ public partial class EnumerableExtensionsTests
 
         Assert.AreEqual(0, result.Length);
     }
-    
+
     [TestMethod]
     public void TestQuintuplesWithTwoElements()
     {
@@ -45,7 +45,7 @@ public partial class EnumerableExtensionsTests
 
         Assert.AreEqual(0, result.Length);
     }
-    
+
     [TestMethod]
     public void TestQuintuplesWithThreeElements()
     {
@@ -54,7 +54,7 @@ public partial class EnumerableExtensionsTests
 
         Assert.AreEqual(0, result.Length);
     }
-    
+
     [TestMethod]
     public void TestQuintuplesWithFourElements()
     {
