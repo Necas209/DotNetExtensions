@@ -8,14 +8,14 @@ public class NumberExtensionsTests
     [TestMethod]
     public void TestNumberOfDigits()
     {
-        Assert.AreEqual(1ul, 0.NumberOfDigits());
-        Assert.AreEqual(1ul, 1.NumberOfDigits());
-        Assert.AreEqual(2ul, 10.NumberOfDigits());
-        Assert.AreEqual(1ul, (-1).NumberOfDigits());
-        Assert.AreEqual(2ul, (-10).NumberOfDigits());
-        Assert.AreEqual(3ul, (-100).NumberOfDigits());
-        Assert.AreEqual(10ul, int.MaxValue.NumberOfDigits());
-        Assert.AreEqual(10ul, int.MinValue.NumberOfDigits());
+        Assert.AreEqual(1, 0.NumberOfDigits());
+        Assert.AreEqual(1, 1.NumberOfDigits());
+        Assert.AreEqual(2, 10.NumberOfDigits());
+        Assert.AreEqual(1, (-1).NumberOfDigits());
+        Assert.AreEqual(2, (-10).NumberOfDigits());
+        Assert.AreEqual(3, (-100).NumberOfDigits());
+        Assert.AreEqual(10, int.MaxValue.NumberOfDigits());
+        Assert.AreEqual(10, int.MinValue.NumberOfDigits());
     }
 
     [TestMethod]
