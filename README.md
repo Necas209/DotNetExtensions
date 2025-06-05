@@ -14,7 +14,7 @@ dotnet add package DotNetExtensions
 ## Usage
 
 ```csharp
-using DotNetExtensions;
+using DotNetExtensions.Core;
 
 public class Example
 {
