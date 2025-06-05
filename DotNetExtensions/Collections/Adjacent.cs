@@ -28,15 +28,19 @@ public static partial class EnumerableExtensions
 
     private static IEnumerable<T[]> AdjacentInternal<T>(IEnumerable<T> source, int length)
     {
-        var array = source as T[] ?? source.ToArray();
-        if (length > array.Length)
+        if (length == 0)
             yield break;
 
-        for (var i = 0; i <= array.Length - length; i++)
+        var window = new Queue<T>(length);
+
+        foreach (var item in source)
         {
-            var segment = new T[length];
-            Array.Copy(array, i, segment, 0, length);
-            yield return segment;
+            window.Enqueue(item);
+            if (window.Count > length)
+                window.Dequeue();
+
+            if (window.Count == length)
+                yield return window.ToArray();
         }
     }
 }

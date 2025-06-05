@@ -23,29 +23,18 @@ public static partial class EnumerableExtensions
     private static IEnumerable<(T First, T Second, T Third, T Fourth, T Fifth)> QuintuplesInternal<T>(
         IEnumerable<T> source)
     {
-        using var enumerator = source.GetEnumerator();
+        var window = new Queue<T>(5);
 
-        // Buffer the first four elements
-        if (!enumerator.MoveNext()) yield break;
-        var first = enumerator.Current;
-
-        if (!enumerator.MoveNext()) yield break;
-        var second = enumerator.Current;
-
-        if (!enumerator.MoveNext()) yield break;
-        var third = enumerator.Current;
-
-        if (!enumerator.MoveNext()) yield break;
-        var fourth = enumerator.Current;
-
-        while (enumerator.MoveNext())
+        foreach (var item in source)
         {
-            var fifth = enumerator.Current;
-            yield return (first, second, third, fourth, fifth);
-            first = second;
-            second = third;
-            third = fourth;
-            fourth = fifth;
+            window.Enqueue(item);
+            if (window.Count > 5)
+                window.Dequeue();
+
+            if (window.Count != 5) continue;
+
+            var arr = window.ToArray();
+            yield return (arr[0], arr[1], arr[2], arr[3], arr[4]);
         }
     }
 }
