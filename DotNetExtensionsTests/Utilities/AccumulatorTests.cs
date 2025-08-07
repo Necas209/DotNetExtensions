@@ -6,7 +6,7 @@ namespace DotNetExtensionsTests.Utilities;
 public class AccumulatorTests
 {
     [TestMethod]
-    public void Add_SingleValue_UpdatesProperties()
+    public void Add_WithSingleValue_UpdatesPropertiesCorrectly()
     {
         var accumulator = new Accumulator<int>();
         accumulator.Add(5);
@@ -19,7 +19,7 @@ public class AccumulatorTests
     }
 
     [TestMethod]
-    public void Add_MultipleValues_UpdatesProperties()
+    public void Add_WithMultipleValues_UpdatesPropertiesCorrectly()
     {
         var accumulator = new Accumulator<int>();
         accumulator.Add(5);
@@ -34,7 +34,7 @@ public class AccumulatorTests
     }
 
     [TestMethod]
-    public void Reset_ResetsProperties()
+    public void Reset_AfterAddingValues_ResetsProperties()
     {
         var accumulator = new Accumulator<int>();
         accumulator.Add(5);
@@ -45,6 +45,15 @@ public class AccumulatorTests
         Assert.AreEqual(int.MinValue, accumulator.Max);
         Assert.AreEqual(0, accumulator.Sum);
         Assert.AreEqual(0, accumulator.Count);
-        Assert.ThrowsExactly<InvalidOperationException>(() => _ = accumulator.Mean);
+        Assert.ThrowsExactly<InvalidOperationException>(() => accumulator.Mean);
+    }
+
+    [TestMethod]
+    public void Add_WhenSumOverflows_ThrowsOverflowException()
+    {
+        var accumulator = new Accumulator<int>();
+        accumulator.Add(int.MaxValue);
+
+        Assert.ThrowsExactly<OverflowException>(() => accumulator.Add(1));
     }
 }

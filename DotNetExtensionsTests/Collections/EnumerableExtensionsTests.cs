@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using DotNetExtensions.Collections;
 
 namespace DotNetExtensionsTests.Collections;
@@ -6,13 +5,14 @@ namespace DotNetExtensionsTests.Collections;
 [TestClass]
 public partial class EnumerableExtensionsTests
 {
-    [TestMethod]
-    public void TestPairwiseWithElements()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Pairwise().ToImmutableArray();
+    private static readonly int[] DefaultSource = [1, 2, 3, 4, 5];
 
-        Assert.AreEqual(4, result.Length);
+    [TestMethod]
+    public void Pairwise_SourceHasMultipleElements_ReturnsExpectedPairs()
+    {
+        var result = DefaultSource.Pairwise().ToList();
+
+        Assert.HasCount(4, result);
         Assert.AreEqual((1, 2), result[0]);
         Assert.AreEqual((2, 3), result[1]);
         Assert.AreEqual((3, 4), result[2]);
@@ -20,138 +20,131 @@ public partial class EnumerableExtensionsTests
     }
 
     [TestMethod]
-    public void TestPairwiseWithOneElement()
+    public void Pairwise_SourceHasOneElement_ReturnsEmpty()
     {
         int[] source = [1];
-        var result = source.Pairwise().ToImmutableArray();
+        var result = source.Pairwise().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public void TestPairwiseWithNoElements()
+    public void Pairwise_SourceIsEmpty_ReturnsEmpty()
     {
         int[] source = [];
-        var result = source.Pairwise().ToArray();
+        var result = source.Pairwise().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public void TestAdjacentWithValidLength()
+    public void Adjacent_ValidLength_ReturnsSlidingWindows()
+    {
+        var result = DefaultSource.Adjacent(3).ToList();
+
+        Assert.HasCount(3, result);
+        CollectionAssert.AreEqual(DefaultSource[..3], result[0]);
+        CollectionAssert.AreEqual(DefaultSource[1..4], result[1]);
+        CollectionAssert.AreEqual(DefaultSource[2..5], result[2]);
+    }
+
+    [TestMethod]
+    public void Adjacent_LengthGreaterThanSource_ReturnsEmpty()
+    {
+        var result = DefaultSource.Adjacent(6).ToList();
+
+        Assert.IsEmpty(result);
+    }
+
+    [TestMethod]
+    public void Adjacent_LengthZero_ReturnsEmpty()
+    {
+        var result = DefaultSource.Adjacent(0).ToList();
+
+        Assert.IsEmpty(result);
+    }
+
+    [TestMethod]
+    public void Adjacent_LengthOne_ReturnsSingleElementWindows()
+    {
+        var result = DefaultSource.Adjacent(1).ToList();
+
+        Assert.HasCount(5, result);
+        CollectionAssert.AreEqual(DefaultSource[..1], result[0]);
+        CollectionAssert.AreEqual(DefaultSource[1..2], result[1]);
+        CollectionAssert.AreEqual(DefaultSource[2..3], result[2]);
+        CollectionAssert.AreEqual(DefaultSource[3..4], result[3]);
+    }
+
+    [TestMethod]
+    public void Adjacent_LengthEqualsSource_ReturnsWholeSourceAsWindow()
+    {
+        var result = DefaultSource.Adjacent(5).ToList();
+
+        Assert.HasCount(1, result);
+        CollectionAssert.AreEqual(DefaultSource, result[0]);
+    }
+
+    [TestMethod]
+    public void SkipAt_ValidIndex_RemovesElementAtIndex()
+    {
+        var result = DefaultSource.SkipAt(4).ToList();
+
+        Assert.HasCount(4, result);
+        CollectionAssert.AreEqual(DefaultSource[..4], result);
+    }
+
+    [TestMethod]
+    public void SkipAt_IndexOutOfRange_ThrowsArgumentOutOfRangeException()
     {
         int[] source = [1, 2, 3, 4, 5];
-        var result = source.Adjacent(3).ToArray();
-
-        Assert.AreEqual(3, result.Length);
-        Assert.IsTrue(result[0] is [1, 2, 3]);
-        Assert.IsTrue(result[1] is [2, 3, 4]);
-        Assert.IsTrue(result[2] is [3, 4, 5]);
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => source.SkipAt(5).ToList());
     }
 
     [TestMethod]
-    public void TestAdjacentWithInvalidLength()
+    public void SkipAt_NegativeIndex_ThrowsArgumentOutOfRangeException()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Adjacent(6).ToArray();
-
-        Assert.AreEqual([], result);
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => DefaultSource.SkipAt(-1));
     }
 
     [TestMethod]
-    public void TestAdjacentWithZeroLength()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Adjacent(0).ToArray();
-
-        Assert.AreEqual([], result);
-    }
-
-    [TestMethod]
-    public void TestAdjacentWithLengthOne()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Adjacent(1).ToArray();
-
-        var expected = ImmutableArray.Create<int[]>([1], [2], [3], [4], [5]);
-        CollectionAssert.AreEqual(expected, result);
-    }
-
-    [TestMethod]
-    public void TestAdjacentWithLengthEqualToSource()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Adjacent(5).ToArray();
-
-        Assert.AreEqual(1, result.Length);
-        CollectionAssert.AreEqual(source, result[0]);
-    }
-
-    [TestMethod]
-    public void TestSkipAtWithValidIndex()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.SkipAt(4).ToArray();
-        var expected = ImmutableArray.Create(1, 2, 3, 4);
-
-        CollectionAssert.AreEqual(expected, result);
-    }
-
-    [TestMethod]
-    public void TestSkipAtWithInvalidIndex()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => source.SkipAt(5).ToArray());
-    }
-
-    [TestMethod]
-    public void TestSkipAtWithNegativeIndex()
-    {
-        int[] source = [1, 2, 3, 4, 5];
-        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => source.SkipAt(-1).ToArray());
-    }
-
-    [TestMethod]
-    public void TestSkipAtWithEmptySource()
+    public void SkipAt_EmptySource_ThrowsArgumentOutOfRangeException()
     {
         int[] source = [];
-        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => source.SkipAt(0).ToArray());
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => source.SkipAt(0).ToList());
     }
 
     [TestMethod]
-    public void TestSkipAtOrDefaultWithValidIndex()
+    public void SkipAtOrDefault_ValidIndex_RemovesElementAtIndex()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.SkipAtOrDefault(2).ToArray();
-        var expected = new[] { 1, 2, 4, 5 };
+        var result = DefaultSource.SkipAtOrDefault(2).ToList();
+        int[] expected = [1, 2, 4, 5];
 
         CollectionAssert.AreEqual(expected, result);
     }
 
     [TestMethod]
-    public void TestSkipAtOrDefaultWithNegativeIndex()
+    public void SkipAtOrDefault_NegativeIndex_ReturnsOriginalSequence()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.SkipAtOrDefault(-1).ToArray();
+        var result = DefaultSource.SkipAtOrDefault(-1).ToList();
 
-        CollectionAssert.AreEqual(source, result);
+        CollectionAssert.AreEqual(DefaultSource, result);
     }
 
     [TestMethod]
-    public void TestSkipAtOrDefaultWithOutOfRangeIndex()
+    public void SkipAtOrDefault_IndexOutOfRange_ReturnsOriginalSequence()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.SkipAtOrDefault(5).ToArray();
+        var result = DefaultSource.SkipAtOrDefault(5).ToList();
 
-        CollectionAssert.AreEqual(source, result);
+        CollectionAssert.AreEqual(DefaultSource, result);
     }
 
     [TestMethod]
-    public void TestSkipAtOrDefaultWithEmptySource()
+    public void SkipAtOrDefault_EmptySource_ReturnsEmpty()
     {
         int[] source = [];
-        var result = source.SkipAtOrDefault(0).ToArray();
+        var result = source.SkipAtOrDefault(0).ToList();
 
-        Assert.AreEqual(source, result);
+        Assert.IsEmpty(result);
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using DotNetExtensions.Collections;
 
 namespace DotNetExtensionsTests.Collections;
@@ -6,12 +5,12 @@ namespace DotNetExtensionsTests.Collections;
 public partial class EnumerableExtensionsTests
 {
     [TestMethod]
-    public void TestQuintuplesWithElements()
+    public void Quintuples_SourceHasEnoughElements_ReturnsExpectedQuintuples()
     {
         int[] source = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        var result = source.Quintuples().ToImmutableArray();
+        var result = source.Quintuples().ToList();
 
-        Assert.AreEqual(5, result.Length);
+        Assert.HasCount(5, result);
         Assert.AreEqual((1, 2, 3, 4, 5), result[0]);
         Assert.AreEqual((2, 3, 4, 5, 6), result[1]);
         Assert.AreEqual((3, 4, 5, 6, 7), result[2]);
@@ -20,47 +19,47 @@ public partial class EnumerableExtensionsTests
     }
 
     [TestMethod]
-    public void TestQuintuplesWithZeroElements()
+    public void Quintuples_SourceIsEmpty_ReturnsEmpty()
     {
         int[] source = [];
-        var result = source.Quintuples().ToImmutableArray();
+        var result = source.Quintuples().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public void TestQuintuplesWithOneElement()
+    public void Quintuples_SourceHasOneElement_ReturnsEmpty()
     {
         int[] source = [1];
-        var result = source.Quintuples().ToImmutableArray();
+        var result = source.Quintuples().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public void TestQuintuplesWithTwoElements()
+    public void Quintuples_SourceHasTwoElements_ReturnsEmpty()
     {
         int[] source = [1, 2];
-        var result = source.Quintuples().ToImmutableArray();
+        var result = source.Quintuples().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public void TestQuintuplesWithThreeElements()
+    public void Quintuples_SourceHasThreeElements_ReturnsEmpty()
     {
         int[] source = [1, 2, 3];
-        var result = source.Quintuples().ToImmutableArray();
+        var result = source.Quintuples().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 
     [TestMethod]
-    public void TestQuintuplesWithFourElements()
+    public void Quintuples_SourceHasFourElements_ReturnsEmpty()
     {
         int[] source = [1, 2, 3, 4];
-        var result = source.Quintuples().ToImmutableArray();
+        var result = source.Quintuples().ToList();
 
-        Assert.AreEqual(0, result.Length);
+        Assert.IsEmpty(result);
     }
 }

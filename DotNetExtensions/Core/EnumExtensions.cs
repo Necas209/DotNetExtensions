@@ -1,3 +1,4 @@
+using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace DotNetExtensions.Core;
@@ -29,10 +30,13 @@ public static class EnumExtensions
         return Unsafe.SizeOf<TEnum>() switch
 #pragma warning restore CS8509 // The switch expression does not handle all possible values of its input type (it is not exhaustive).
         {
-            sizeof(byte) => (Unsafe.As<TEnum, byte>(ref value) & Unsafe.As<TEnum, byte>(ref flag)) != 0,
-            sizeof(ushort) => (Unsafe.As<TEnum, ushort>(ref value) & Unsafe.As<TEnum, ushort>(ref flag)) != 0,
-            sizeof(uint) => (Unsafe.As<TEnum, uint>(ref value) & Unsafe.As<TEnum, uint>(ref flag)) != 0,
-            sizeof(ulong) => (Unsafe.As<TEnum, ulong>(ref value) & Unsafe.As<TEnum, ulong>(ref flag)) != 0
+            sizeof(byte) => CheckFlag<byte>(),
+            sizeof(ushort) => CheckFlag<ushort>(),
+            sizeof(uint) => CheckFlag<uint>(),
+            sizeof(ulong) => CheckFlag<ulong>()
         };
+
+        bool CheckFlag<T>() where T : struct, IBinaryInteger<T> =>
+            (Unsafe.As<TEnum, T>(ref value) & Unsafe.As<TEnum, T>(ref flag)) != T.Zero;
     }
 }

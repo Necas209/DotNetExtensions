@@ -6,59 +6,74 @@ namespace DotNetExtensionsTests.Core;
 public class NumberExtensionsTests
 {
     [TestMethod]
-    public void TestNumberOfDigits()
+    [DataRow(0, 1)]
+    [DataRow(1, 1)]
+    [DataRow(10, 2)]
+    [DataRow(-1, 1)]
+    [DataRow(-10, 2)]
+    [DataRow(-100, 3)]
+    [DataRow(int.MaxValue, 10)]
+    [DataRow(int.MinValue, 10)]
+    public void NumberOfDigits_VariousInputs_ReturnsExpected(int value, int expected)
     {
-        Assert.AreEqual(1, 0.NumberOfDigits());
-        Assert.AreEqual(1, 1.NumberOfDigits());
-        Assert.AreEqual(2, 10.NumberOfDigits());
-        Assert.AreEqual(1, (-1).NumberOfDigits());
-        Assert.AreEqual(2, (-10).NumberOfDigits());
-        Assert.AreEqual(3, (-100).NumberOfDigits());
-        Assert.AreEqual(10, int.MaxValue.NumberOfDigits());
-        Assert.AreEqual(10, int.MinValue.NumberOfDigits());
+        Assert.AreEqual(expected, value.NumberOfDigits());
     }
 
     [TestMethod]
-    public void TestSplit()
+    [DataRow(0, 0, 0)]
+    [DataRow(1, 0, 1)]
+    [DataRow(10, 1, 0)]
+    [DataRow(1234, 12, 34)]
+    [DataRow(123456, 123, 456)]
+    [DataRow(1234567, 123, 4567)]
+    public void Split_VariousInputs_ReturnsExpected(int value, int expectedLeft, int expectedRight)
     {
-        Assert.AreEqual((0, 0), 0.Split());
-        Assert.AreEqual((0, 1), 1.Split());
-        Assert.AreEqual((1, 0), 10.Split());
-        Assert.AreEqual((12, 34), 1234.Split());
-        Assert.AreEqual((123, 456), 123456.Split());
-        Assert.AreEqual((123, 4567), 1234567.Split());
+        Assert.AreEqual((expectedLeft, expectedRight), value.Split());
     }
 
     [TestMethod]
-    public void TestIsPalindrome()
+    public void Split_NegativeNumber_ThrowsArgumentOutOfRangeException()
     {
-        Assert.IsTrue(0.IsPalindrome());
-        Assert.IsTrue(1.IsPalindrome());
-        Assert.IsTrue(11.IsPalindrome());
-        Assert.IsTrue(121.IsPalindrome());
-        Assert.IsTrue(12321.IsPalindrome());
-        Assert.IsTrue(1234321.IsPalindrome());
-        Assert.IsFalse(12.IsPalindrome());
-        Assert.IsFalse(123.IsPalindrome());
-        Assert.IsFalse(1234.IsPalindrome());
-        Assert.IsFalse(int.MaxValue.IsPalindrome());
-        Assert.IsFalse(int.MinValue.IsPalindrome());
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => (-123).Split());
     }
 
     [TestMethod]
-    public void TestReverse()
+    [DataRow(0, true)]
+    [DataRow(1, true)]
+    [DataRow(11, true)]
+    [DataRow(121, true)]
+    [DataRow(12321, true)]
+    [DataRow(1234321, true)]
+    [DataRow(12, false)]
+    [DataRow(123, false)]
+    [DataRow(1234, false)]
+    [DataRow(int.MaxValue, false)]
+    [DataRow(int.MinValue, false)]
+    public void IsPalindrome_VariousInputs_ReturnsExpected(int value, bool expected)
     {
-        Assert.AreEqual(0, 0.Reverse());
-        Assert.AreEqual(1, 1.Reverse());
-        Assert.AreEqual(1, 10.Reverse());
-        Assert.AreEqual(21, 12.Reverse());
-        Assert.AreEqual(4321, 1234.Reverse());
-        Assert.AreEqual(7654321, 1234567.Reverse());
-        Assert.AreEqual(-1, (-1).Reverse());
-        Assert.AreEqual(-1, (-10).Reverse());
-        Assert.AreEqual(-21, (-12).Reverse());
-        Assert.AreEqual(-4321, (-1234).Reverse());
-        Assert.AreEqual(-7654321, (-1234567).Reverse());
-        Assert.ThrowsExactly<OverflowException>(() => _ = int.MaxValue.Reverse());
+        Assert.AreEqual(expected, value.IsPalindrome());
+    }
+
+    [TestMethod]
+    [DataRow(0, 0)]
+    [DataRow(1, 1)]
+    [DataRow(10, 1)]
+    [DataRow(12, 21)]
+    [DataRow(1234, 4321)]
+    [DataRow(1234567, 7654321)]
+    [DataRow(-1, -1)]
+    [DataRow(-10, -1)]
+    [DataRow(-12, -21)]
+    [DataRow(-1234, -4321)]
+    [DataRow(-1234567, -7654321)]
+    public void Reverse_VariousInputs_ReturnsExpected(int value, int expected)
+    {
+        Assert.AreEqual(expected, value.Reverse());
+    }
+
+    [TestMethod]
+    public void Reverse_IntMaxValue_ThrowsOverflowException()
+    {
+        Assert.ThrowsExactly<OverflowException>(() => int.MaxValue.Reverse());
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using DotNetExtensions.Collections;
 
 namespace DotNetExtensionsTests.Collections;
@@ -6,27 +5,18 @@ namespace DotNetExtensionsTests.Collections;
 public partial class EnumerableExtensionsTests
 {
     [TestMethod]
-    public void TestCombinationsWithZeroLength()
+    public void Combinations_LengthZero_ReturnsSingleEmptyCombination()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source
-            .Combinations(0)
-            .Select(x => x.ToImmutableArray())
-            .ToImmutableArray();
-
-        Assert.AreEqual(1, result.Length);
-        Assert.IsTrue(result[0] is []);
+        var result = DefaultSource.Combinations(0).ToList();
+        Assert.HasCount(1, result);
+        Assert.IsEmpty(result[0]);
     }
 
     [TestMethod]
-    public void TestCombinationsWithOneLength()
+    public void Combinations_LengthOne_ReturnsAllSingleElementCombinations()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Combinations(1)
-            .Select(x => x.ToImmutableArray())
-            .ToImmutableArray();
-
-        Assert.AreEqual(5, result.Length);
+        var result = DefaultSource.Combinations(1).ToList();
+        Assert.HasCount(5, result);
         Assert.IsTrue(result[0] is [1]);
         Assert.IsTrue(result[1] is [2]);
         Assert.IsTrue(result[2] is [3]);
@@ -35,14 +25,10 @@ public partial class EnumerableExtensionsTests
     }
 
     [TestMethod]
-    public void TestCombinationsWithTwoLength()
+    public void Combinations_LengthTwo_ReturnsAllTwoElementCombinations()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Combinations(2)
-            .Select(x => x.ToImmutableArray())
-            .ToImmutableArray();
-
-        Assert.AreEqual(10, result.Length);
+        var result = DefaultSource.Combinations(2).ToList();
+        Assert.HasCount(10, result);
         Assert.IsTrue(result[0] is [1, 2]);
         Assert.IsTrue(result[1] is [1, 3]);
         Assert.IsTrue(result[2] is [1, 4]);
@@ -56,14 +42,10 @@ public partial class EnumerableExtensionsTests
     }
 
     [TestMethod]
-    public void TestCombinationsWithThreeLength()
+    public void Combinations_LengthThree_ReturnsAllThreeElementCombinations()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Combinations(3)
-            .Select(x => x.ToImmutableArray())
-            .ToImmutableArray();
-
-        Assert.AreEqual(10, result.Length);
+        var result = DefaultSource.Combinations(3).ToList();
+        Assert.HasCount(10, result);
         Assert.IsTrue(result[0] is [1, 2, 3]);
         Assert.IsTrue(result[1] is [1, 2, 4]);
         Assert.IsTrue(result[2] is [1, 2, 5]);
@@ -77,11 +59,15 @@ public partial class EnumerableExtensionsTests
     }
 
     [TestMethod]
-    public void TestCombinationsWithLengthGreaterThanSource()
+    public void Combinations_LengthGreaterThanSource_ReturnsEmpty()
     {
-        int[] source = [1, 2, 3, 4, 5];
-        var result = source.Combinations(6).ToImmutableArray();
+        var result = DefaultSource.Combinations(6).ToList();
+        Assert.IsEmpty(result);
+    }
 
-        Assert.AreEqual(0, result.Length);
+    [TestMethod]
+    public void Combinations_NegativeLength_ThrowsArgumentOutOfRangeException()
+    {
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => DefaultSource.Combinations(-1));
     }
 }

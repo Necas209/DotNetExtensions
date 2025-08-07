@@ -8,7 +8,12 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>5.4.0</Version>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <WarningsAsErrors>nullable</WarningsAsErrors>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <Version>5.5.0</Version>
         <Authors>Diogo Medeiros</Authors>
         <Company>Diogo Medeiros</Company>
         <Description>This is a collection of extension methods for .NET Core.</Description>

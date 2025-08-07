@@ -15,7 +15,7 @@ public class EnumExtensionsTests
     }
 
     [TestMethod]
-    public void TestHasAnyFlagByte()
+    public void HasAnyFlag_WithByteFlags_ReturnsExpectedResults()
     {
         const ByteFlags flags = ByteFlags.Flag1 | ByteFlags.Flag2 | ByteFlags.Flag4;
 
@@ -35,7 +35,7 @@ public class EnumExtensionsTests
     }
 
     [TestMethod]
-    public void TestHasAnyFlagShort()
+    public void HasAnyFlag_WithUShortFlags_ReturnsExpectedResults()
     {
         const UShortFlags flags = UShortFlags.Flag1 | UShortFlags.Flag2 | UShortFlags.Flag4;
 
@@ -55,7 +55,7 @@ public class EnumExtensionsTests
     }
 
     [TestMethod]
-    public void TestHasAnyFlagUInt()
+    public void HasAnyFlag_WithUIntFlags_ReturnsExpectedResults()
     {
         const UIntFlags flags = UIntFlags.Flag1 | UIntFlags.Flag2 | UIntFlags.Flag4;
 
@@ -75,7 +75,7 @@ public class EnumExtensionsTests
     }
 
     [TestMethod]
-    public void TestHasAnyFlagULong()
+    public void HasAnyFlag_WithULongFlags_ReturnsExpectedResults()
     {
         const ULongFlags flags = ULongFlags.Flag1 | ULongFlags.Flag2 | ULongFlags.Flag4;
 

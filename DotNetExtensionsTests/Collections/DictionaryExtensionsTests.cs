@@ -6,7 +6,7 @@ namespace DotNetExtensionsTests.Collections;
 public class DictionaryExtensionsTests
 {
     [TestMethod]
-    public void TestGetOrAddNewKey()
+    public void GetOrAdd_NewKey_AddsAndReturnsValue()
     {
         // Arrange
         var dictionary = new Dictionary<string, int>();
@@ -23,12 +23,12 @@ public class DictionaryExtensionsTests
     }
 
     [TestMethod]
-    public void TestGetOrAddExistingKey()
+    public void GetOrAdd_ExistingKey_ReturnsExistingValue()
     {
         // Arrange
         var dictionary = new Dictionary<string, int> { { "existingKey", 100 } };
         const string key = "existingKey";
-        const int valueToAdd = 42; // This value should not be used since the key already exists.
+        const int valueToAdd = 42; // Should not be used.
 
         // Act
         var result = dictionary.GetOrAdd(key, valueToAdd);
@@ -39,7 +39,7 @@ public class DictionaryExtensionsTests
     }
 
     [TestMethod]
-    public void TestTryUpdateExistingKey()
+    public void TryUpdate_ExistingKey_UpdatesValueAndReturnsTrue()
     {
         // Arrange
         var dictionary = new Dictionary<string, int> { { "existingKey", 100 } };
@@ -55,7 +55,7 @@ public class DictionaryExtensionsTests
     }
 
     [TestMethod]
-    public void TestTryUpdateNonExistingKey()
+    public void TryUpdate_NonExistingKey_ReturnsFalseAndDoesNotAdd()
     {
         // Arrange
         var dictionary = new Dictionary<string, int>();

@@ -7,7 +7,7 @@ namespace DotNetExtensionsTests.Core;
 public class PointExtensionsTests
 {
     [TestMethod]
-    public void TestGetNeighbors()
+    public void GetNeighbors_WithOrigin_ReturnsExpectedNeighbors()
     {
         var point = new Point(0, 0);
         var (left, right, top, bottom) = point.GetNeighbors();
@@ -19,7 +19,7 @@ public class PointExtensionsTests
     }
 
     [TestMethod]
-    public void TestManhattanDistance()
+    public void ManhattanDistance_WithPositiveCoordinates_ReturnsExpectedDistance()
     {
         var point = new Point(0, 0);
         var other = new Point(3, 4);
@@ -28,7 +28,7 @@ public class PointExtensionsTests
     }
 
     [TestMethod]
-    public void TestManhattanDistance_SamePoint()
+    public void ManhattanDistance_WithSamePoint_ReturnsZero()
     {
         var point = new Point(0, 0);
         var other = new Point(0, 0);
@@ -37,7 +37,7 @@ public class PointExtensionsTests
     }
 
     [TestMethod]
-    public void TestManhattanDistance_Negative()
+    public void ManhattanDistance_WithNegativeCoordinates_ReturnsExpectedDistance()
     {
         var point = new Point(0, 0);
         var other = new Point(-3, -4);
