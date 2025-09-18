@@ -3,6 +3,9 @@
 This is a collection of extension methods for .NET Core.
 The goal is to provide a set of useful extension methods that are not included in the .NET Core framework.
 
+[![.NET](https://github.com/Necas209/DotNetExtensions/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Necas209/DotNetExtensions/actions/workflows/dotnet.yml)
+[![CodeQL Advanced](https://github.com/Necas209/DotNetExtensions/actions/workflows/codeql.yml/badge.svg)](https://github.com/Necas209/DotNetExtensions/actions/workflows/codeql.yml)
+
 ## Installation
 
 You can install the package via NuGet:
