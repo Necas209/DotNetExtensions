@@ -19,6 +19,18 @@ public class PointExtensionsTests
     }
 
     [TestMethod]
+    public void GetCorners_WithOrigin_ReturnsExpectedCorners()
+    {
+        var point = new Point(0, 0);
+        var (topLeft, topRight, bottomLeft, bottomRight) = point.GetCorners();
+        
+        Assert.AreEqual(new Point(-1, -1), topLeft);
+        Assert.AreEqual(new Point(1, -1), topRight);
+        Assert.AreEqual(new Point(-1, 1), bottomLeft);
+        Assert.AreEqual(new Point(1, 1), bottomRight);
+    }
+    
+    [TestMethod]
     public void ManhattanDistance_WithPositiveCoordinates_ReturnsExpectedDistance()
     {
         var point = new Point(0, 0);

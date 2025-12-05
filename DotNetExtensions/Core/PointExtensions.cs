@@ -30,6 +30,28 @@ public static class PointExtensions
     }
 
     /// <summary>
+    /// Gets the four diagonal corners of a given point: top-left, top-right, bottom-left, and bottom-right.
+    /// </summary>
+    /// <param name="point">The point for which to find the corners.</param>
+    /// <returns>
+    /// A tuple containing the corners of the given point:
+    /// <list type="bullet">
+    /// <item>TopLeft: The point diagonally above and to the left of the given point (X - 1, Y - 1).</item>
+    /// <item>TopRight: The point diagonally above and to the right of the given point (X + 1, Y - 1).</item>
+    /// <item>BottomLeft: The point diagonally below and to the left of the given point (X - 1, Y + 1).</item>
+    /// <item>BottomRight: The point diagonally below and to the right of the given point (X + 1, Y + 1).</item>
+    /// </list>
+    /// </returns>
+    public static (Point TopLeft, Point TopRight, Point BottomLeft, Point BottomRight) GetCorners(this Point point)
+    {
+        var topLeft = point with { X = point.X - 1, Y = point.Y - 1 };
+        var topRight = point with { X = point.X + 1, Y = point.Y - 1 };
+        var bottomLeft = point with { X = point.X - 1, Y = point.Y + 1 };
+        var bottomRight = point with { X = point.X + 1, Y = point.Y + 1 };
+        return (topLeft, topRight, bottomLeft, bottomRight);
+    }
+
+    /// <summary>
     /// Calculates the Manhattan distance between two points.
     /// </summary>
     /// <param name="point">The starting point.</param>
