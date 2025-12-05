@@ -1,4 +1,4 @@
 ﻿<Solution>
-    <Project Path="DotNetExtensions\DotNetExtensions.csproj" Type="Classic C#"/>
-    <Project Path="DotNetExtensionsTests\DotNetExtensionsTests.csproj" Type="Classic C#"/>
+    <Project Path="DotNetExtensions\DotNetExtensions.csproj" Type="C#" />
+    <Project Path="DotNetExtensionsTests\DotNetExtensionsTests.csproj" Type="C#" />
 </Solution>

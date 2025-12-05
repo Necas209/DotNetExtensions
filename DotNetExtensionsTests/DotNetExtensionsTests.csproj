@@ -17,4 +17,8 @@
         <ProjectReference Include="..\DotNetExtensions\DotNetExtensions.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.0.1" />
+    </ItemGroup>
+
 </Project>
