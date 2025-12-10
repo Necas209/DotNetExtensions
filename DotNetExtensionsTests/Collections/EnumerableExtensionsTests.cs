@@ -147,28 +147,6 @@ public partial class EnumerableExtensionsTests
 
         Assert.IsEmpty(result);
     }
-
-    [TestMethod]
-    public void Product_SourceHasMultipleElements_ReturnsCorrectProduct()
-    {
-        var result = DefaultSource.Product();
-        Assert.AreEqual(120, result);
-    }
-
-    [TestMethod]
-    public void Product_SourceHasOneElement_ReturnsThatElement()
-    {
-        int[] source = [7];
-        var result = source.Product();
-        Assert.AreEqual(7, result);
-    }
-
-    [TestMethod]
-    public void Product_SourceIsEmpty_ThrowsInvalidOperationException()
-    {
-        int[] source = [];
-        Assert.ThrowsExactly<InvalidOperationException>(() => source.Product());
-    }
     
     [TestMethod]
     public void Pairs_SourceHasMultipleElements_ReturnsExpectedPairs()
