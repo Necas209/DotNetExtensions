@@ -7,7 +7,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Pairwise_SourceHasMultipleElements_ReturnsExpectedPairs()
     {
-        var result = DefaultSource.Pairwise().ToList();
+        var result = _defaultSource.Pairwise().ToList();
 
         Assert.HasCount(4, result);
         Assert.AreEqual((1, 2), result[0]);

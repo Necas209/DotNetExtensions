@@ -7,10 +7,10 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void SkipAt_ValidIndex_RemovesElementAtIndex()
     {
-        var result = DefaultSource.SkipAt(4).ToList();
+        var result = _defaultSource.SkipAt(4).ToList();
 
         Assert.HasCount(4, result);
-        CollectionAssert.AreEqual(DefaultSource[..4], result);
+        CollectionAssert.AreEqual(_defaultSource[..4], result);
     }
 
     [TestMethod]
@@ -23,7 +23,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void SkipAt_NegativeIndex_ThrowsArgumentOutOfRangeException()
     {
-        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => DefaultSource.SkipAt(-1));
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => _defaultSource.SkipAt(-1));
     }
 
     [TestMethod]
@@ -36,7 +36,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void SkipAtOrDefault_ValidIndex_RemovesElementAtIndex()
     {
-        var result = DefaultSource.SkipAtOrDefault(2).ToList();
+        var result = _defaultSource.SkipAtOrDefault(2).ToList();
         int[] expected = [1, 2, 4, 5];
 
         CollectionAssert.AreEqual(expected, result);
@@ -45,17 +45,17 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void SkipAtOrDefault_NegativeIndex_ReturnsOriginalSequence()
     {
-        var result = DefaultSource.SkipAtOrDefault(-1).ToList();
+        var result = _defaultSource.SkipAtOrDefault(-1).ToList();
 
-        CollectionAssert.AreEqual(DefaultSource, result);
+        CollectionAssert.AreEqual(_defaultSource, result);
     }
 
     [TestMethod]
     public void SkipAtOrDefault_IndexOutOfRange_ReturnsOriginalSequence()
     {
-        var result = DefaultSource.SkipAtOrDefault(5).ToList();
+        var result = _defaultSource.SkipAtOrDefault(5).ToList();
 
-        CollectionAssert.AreEqual(DefaultSource, result);
+        CollectionAssert.AreEqual(_defaultSource, result);
     }
 
     [TestMethod]

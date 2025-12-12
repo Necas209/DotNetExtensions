@@ -7,13 +7,13 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Pairs_SourceHasMultipleElements_ReturnsExpectedPairs()
     {
-        AssertPairsAreExpected(DefaultSource);
+        AssertPairsAreExpected(_defaultSource);
     }
 
     [TestMethod]
     public void Pairs_SourceIsCollection_ReturnsExpectedPairs()
     {
-        AssertPairsAreExpected(DefaultSource.ToHashSet());
+        AssertPairsAreExpected(_defaultSource.ToHashSet());
     }
 
     [TestMethod]

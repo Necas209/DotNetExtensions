@@ -7,7 +7,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Product_SourceHasMultipleElements_ReturnsCorrectProduct()
     {
-        var result = DefaultSource.Product();
+        var result = _defaultSource.Product();
         Assert.AreEqual(120, result);
     }
 
@@ -52,7 +52,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Or_SourceHasMultipleElements_ReturnsCorrectOr()
     {
-        var result = DefaultSource.Or();
+        var result = _defaultSource.Or();
         Assert.AreEqual(7, result);
     }
 
@@ -74,7 +74,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Xor_SourceHasMultipleElements_ReturnsCorrectXor()
     {
-        var result = DefaultSource.Xor();
+        var result = _defaultSource.Xor();
         Assert.AreEqual(1, result);
     }
 

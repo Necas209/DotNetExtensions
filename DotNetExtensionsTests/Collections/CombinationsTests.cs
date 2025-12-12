@@ -7,7 +7,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Combinations_LengthZero_ReturnsSingleEmptyCombination()
     {
-        var result = DefaultSource.Combinations(0).ToList();
+        var result = _defaultSource.Combinations(0).ToList();
         Assert.HasCount(1, result);
         Assert.IsEmpty(result[0]);
     }
@@ -15,7 +15,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Combinations_LengthOne_ReturnsAllSingleElementCombinations()
     {
-        var result = DefaultSource.Combinations(1).ToList();
+        var result = _defaultSource.Combinations(1).ToList();
         Assert.HasCount(5, result);
         Assert.IsTrue(result[0] is [1]);
         Assert.IsTrue(result[1] is [2]);
@@ -27,7 +27,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Combinations_LengthTwo_ReturnsAllTwoElementCombinations()
     {
-        var result = DefaultSource.Combinations(2).ToList();
+        var result = _defaultSource.Combinations(2).ToList();
         Assert.HasCount(10, result);
         Assert.IsTrue(result[0] is [1, 2]);
         Assert.IsTrue(result[1] is [1, 3]);
@@ -44,7 +44,7 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Combinations_LengthThree_ReturnsAllThreeElementCombinations()
     {
-        var result = DefaultSource.Combinations(3).ToList();
+        var result = _defaultSource.Combinations(3).ToList();
         Assert.HasCount(10, result);
         Assert.IsTrue(result[0] is [1, 2, 3]);
         Assert.IsTrue(result[1] is [1, 2, 4]);
@@ -61,13 +61,13 @@ public partial class EnumerableExtensionsTests
     [TestMethod]
     public void Combinations_LengthGreaterThanSource_ReturnsEmpty()
     {
-        var result = DefaultSource.Combinations(6).ToList();
+        var result = _defaultSource.Combinations(6).ToList();
         Assert.IsEmpty(result);
     }
 
     [TestMethod]
     public void Combinations_NegativeLength_ThrowsArgumentOutOfRangeException()
     {
-        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => DefaultSource.Combinations(-1));
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => _defaultSource.Combinations(-1));
     }
 }
