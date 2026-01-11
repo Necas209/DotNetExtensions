@@ -25,7 +25,7 @@ public partial class EnumerableExtensionsTests
         int[] source = [];
         Assert.ThrowsExactly<InvalidOperationException>(() => source.Product());
     }
-    
+
     [TestMethod]
     public void And_SourceHasMultipleElements_ReturnsCorrectAnd()
     {
@@ -41,7 +41,7 @@ public partial class EnumerableExtensionsTests
         var result = source.And();
         Assert.AreEqual(7, result);
     }
-    
+
     [TestMethod]
     public void And_SourceIsEmpty_ThrowsInvalidOperationException()
     {

@@ -21,20 +21,20 @@ public static partial class EnumerableExtensions
         switch (source)
         {
             case IList<T> list:
-            {
-                return PairsInternal(list);
-            }
+                {
+                    return PairsInternal(list);
+                }
             case ICollection<T> coll:
-            {
-                var array = new T[coll.Count];
-                coll.CopyTo(array, 0);
-                return PairsInternal(array);
-            }
+                {
+                    var array = new T[coll.Count];
+                    coll.CopyTo(array, 0);
+                    return PairsInternal(array);
+                }
             default:
-            {
-                var buffered = source.ToList();
-                return PairsInternal(buffered);
-            }
+                {
+                    var buffered = source.ToList();
+                    return PairsInternal(buffered);
+                }
         }
     }
 

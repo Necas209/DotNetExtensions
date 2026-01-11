@@ -17,7 +17,7 @@ public partial class EnumerableExtensions
         public T Product()
         {
             ArgumentNullException.ThrowIfNull(source);
-        
+
             using var e = source.GetEnumerator();
             if (!e.MoveNext())
                 throw new InvalidOperationException("Sequence contains no elements.");
@@ -91,7 +91,7 @@ public partial class EnumerableExtensions
         public T Xor()
         {
             ArgumentNullException.ThrowIfNull(source);
-        
+
             using var e = source.GetEnumerator();
             if (!e.MoveNext())
                 throw new InvalidOperationException("Sequence contains no elements.");

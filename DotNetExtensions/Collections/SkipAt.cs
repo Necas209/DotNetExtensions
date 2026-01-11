@@ -1,4 +1,4 @@
-﻿namespace DotNetExtensions.Collections;
+namespace DotNetExtensions.Collections;
 
 public static partial class EnumerableExtensions
 {

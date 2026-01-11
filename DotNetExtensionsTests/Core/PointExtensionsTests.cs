@@ -23,13 +23,13 @@ public class PointExtensionsTests
     {
         var point = new Point(0, 0);
         var (topLeft, topRight, bottomLeft, bottomRight) = point.GetCorners();
-        
+
         Assert.AreEqual(new Point(-1, -1), topLeft);
         Assert.AreEqual(new Point(1, -1), topRight);
         Assert.AreEqual(new Point(-1, 1), bottomLeft);
         Assert.AreEqual(new Point(1, 1), bottomRight);
     }
-    
+
     [TestMethod]
     public void ManhattanDistance_WithPositiveCoordinates_ReturnsExpectedDistance()
     {
