@@ -53,7 +53,7 @@ jobs:
       - name: Run Qodana Scan
         uses: JetBrains/qodana-action@v2024.3
         with:
-          args: "-i,.,--linter,jetbrains/qodana-dotnet:2024.3"
+          args: "-i,.,--linter,jetbrains/qodana-dotnet:2025.3"
           pr-mode: false
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_318327343 }}

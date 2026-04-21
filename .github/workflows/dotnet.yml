@@ -22,7 +22,7 @@ jobs:
     # Step 1: Check out the repository
     - uses: actions/checkout@v4
 
-    # Step 2: Set up .NET environment
+    # Step 2: Set up the .NET environment
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
