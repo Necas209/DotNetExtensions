@@ -20,16 +20,13 @@ public static class NumberExtensions
         /// </remarks>
         public int NumberOfDigits()
         {
-            if (number == T.Zero)
-                return 1;
-
             var ten = T.CreateChecked(10);
             var count = 0;
-            while (number != T.Zero)
+            do
             {
                 number /= ten;
                 count++;
-            }
+            } while (number != T.Zero);
 
             return count;
         }
@@ -72,7 +69,7 @@ public static class NumberExtensions
             var ten = T.CreateChecked(10);
 
             var reverse = T.Zero;
-            while (number != T.Zero)
+            while (!T.IsZero(number))
             {
                 checked
                 {

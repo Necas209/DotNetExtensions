@@ -62,9 +62,6 @@ public static class PointExtensions
         /// by summing the absolute differences between the X coordinates and the Y coordinates.
         /// It is commonly used in grid-based distance calculations where diagonal movement is not allowed.
         /// </remarks>
-        public int ManhattanDistance(Point other)
-        {
-            return Math.Abs(point.X - other.X) + Math.Abs(point.Y - other.Y);
-        }
+        public int ManhattanDistance(Point other) => Math.Abs(point.X - other.X) + Math.Abs(point.Y - other.Y);
     }
 }
