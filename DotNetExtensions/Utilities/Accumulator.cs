@@ -56,8 +56,8 @@ public class Accumulator<T> where T : INumber<T>, IMinMaxValue<T>
     /// </exception>
     public void Add(T value)
     {
-        if (value < Min) Min = value;
-        if (value > Max) Max = value;
+        Min = T.Min(value, Min);
+        Max = T.Max(value, Max);
         checked
         {
             Sum += value;
