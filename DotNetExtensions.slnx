@@ -1,4 +1,7 @@
 ﻿<Solution>
-    <Project Path="DotNetExtensions\DotNetExtensions.csproj" Type="C#" />
-    <Project Path="DotNetExtensionsTests\DotNetExtensionsTests.csproj" Type="C#" />
+    <Folder Name="/Solution Files/">
+        <File Path="global.json" />
+    </Folder>
+    <Project Path="DotNetExtensions\DotNetExtensions.csproj" />
+    <Project Path="DotNetExtensionsTests\DotNetExtensionsTests.csproj" />
 </Solution>
